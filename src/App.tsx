@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ClassComponentProps from './components/ClassComponents/ClassComponentProps';
+import FunctionalComponentProps from './components/FunctionalComponents/FunctionalComponentProps';
+import ServiceOne from './services/ServiceOne';
+import ServiceThree from './services/ServiceThree';
+import { ServiceProvider } from './providers/ServiceProvider';
+import FunctionalInjectedComponent from './components/FunctionalComponents/FunctionInjectedComponent';
+import ClassInjectedComponent from './components/ClassComponents/ClassInjectedComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FunctionComponent = () => {
+	return (
+		<div className="App">
+			<ClassComponentProps serviceOne={new ServiceOne()} serviceThree={new ServiceThree()}></ClassComponentProps>
+			<FunctionalComponentProps
+				serviceOne={new ServiceOne()}
+				serviceThree={new ServiceThree()}
+			></FunctionalComponentProps>
+			<ServiceProvider>
+				<ClassInjectedComponent />
+				<FunctionalInjectedComponent />
+			</ServiceProvider>
+		</div>
+	);
+};
 
 export default App;
